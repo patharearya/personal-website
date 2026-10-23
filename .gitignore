@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.vercel/
+brag-output/
+reference/frames/
+reference/*.mov
+.env*
