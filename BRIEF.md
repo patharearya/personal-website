@@ -33,9 +33,21 @@ Superseded answers are struck through, not deleted.
 | D17 | Non-tech items | ~~Experience: Fucient, tutoring, District C. About: swim captain, EMT, HOSA.~~ Superseded by D18. Experience: Fucient, math tutoring. About: swim team captain and school-record medley relay, club swimming at UNC, NHS chapter president, English/Hindi/Marathi. |
 | D18 | Resume vs LinkedIn | Keep the site in line with the resume. LinkedIn-only items (District C, EMT, HOSA, Red Cross, Spanish, extra certifications) are left out. |
 
+## Redesign, 2026-10-23
+
+Supersedes the light Swiss build and D12/D13's motif details. Direction contract:
+`.impeccable/surfaces/index-html.md` ("Night pool from below").
+
+| # | Question | Decision |
+|---|---|---|
+| D19 | Section order | About me, Where I've been, Work, contact block. No hero, no How I work. |
+| D20 | Look | Calm and dark, muted gold accent. One continuous interactive WebGL artwork (pool caustics + a gold lane rope) that changes with scroll. |
+| D21 | Projects | Sideways strip on a slight 3D curve, scroll-driven, snaps per slide. Media, name, a line or two. No stat counters or number-line charts. |
+| D22 | Tone | About Arya and the projects, not a resume replica. NHS chapter president and languages lines removed. |
+| D23 | Portrait | Arya's own photo (supplied 2026-10-23), cut out and duotoned into the pool palette, right of the About text, screen-blended into the water. Resolves D12. Origin embedded in `public/media/arya.png`. |
+
 ## Still open
 
-- Hero photo (D12).
 - Custom domain (D6).
 - Arya: add apathare@unc.edu to the GitHub account so the 22 Aqua Static
   commits are credited (D10).

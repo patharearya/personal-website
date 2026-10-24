@@ -1,9 +1,9 @@
 // Captures review screenshots from the local preview (npx vite preview --port 4173).
-// desktop.png / mobile-N.png: full page, static layout. scroll/dNN.png: motion build at 1440x900.
+// desktop.png / mobile-N.png: full page, reduced motion. scroll/dNN.png: motion build at 1440x900.
 import { chromium } from 'playwright-core';
 const URL = process.argv[2] || 'http://localhost:4173/';
 const OUT = '.impeccable/review';
-const browser = await chromium.launch({ channel: 'chrome' });
+const browser = await chromium.launch({ channel: 'chrome', args: ['--enable-unsafe-swiftshader', '--use-angle=swiftshader'] });
 const errors = [];
 
 const shoot = async (opts, fn) => {
@@ -31,24 +31,20 @@ await shoot({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMob
 });
 await shoot({ viewport: { width: 1440, height: 900 } }, async (p) => {
   await p.waitForTimeout(2600);
+  await p.mouse.move(900, 380);
+  await p.mouse.move(1000, 420, { steps: 8 });
   await p.screenshot({ path: `${OUT}/scroll/d00.png` });
   const h = await p.evaluate(() => document.documentElement.scrollHeight - innerHeight);
-  const n = 18;
+  const n = 12;
   for (let i = 1; i <= n; i++) {
-    await p.evaluate((y) => window.scrollTo(0, y), Math.round((h * i) / n));
-    await p.waitForTimeout(1300);
+    // Real wheel steps (not scrollTo), so snapping sees ordinary scroll speeds.
+    for (let k = 0; k < 8; k++) {
+      await p.mouse.wheel(0, h / n / 8);
+      await p.waitForTimeout(60);
+    }
+    await p.waitForTimeout(1800);
     await p.screenshot({ path: `${OUT}/scroll/d${String(i).padStart(2, '0')}.png` });
   }
-});
-// Mid-scroll: wheel fast and capture before Lenis settles, to show the velocity blur.
-await shoot({ viewport: { width: 1440, height: 900 } }, async (p) => {
-  await p.waitForTimeout(2600);
-  await p.mouse.move(700, 450);
-  for (let i = 0; i < 6; i++) await p.mouse.wheel(0, 260);
-  await p.waitForTimeout(140);
-  const state = await p.evaluate(() => ({ moving: document.documentElement.classList.contains('is-moving'), v: getComputedStyle(document.documentElement).getPropertyValue('--v'), dev: document.querySelector('#vblur feGaussianBlur').getAttribute('stdDeviation') }));
-  await p.screenshot({ path: `${OUT}/scroll/blur.png` });
-  console.log('mid-scroll state', JSON.stringify(state));
 });
 await browser.close();
 console.log(errors.length ? 'ERRORS:\n' + errors.join('\n') : 'no console errors');

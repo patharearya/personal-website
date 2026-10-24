@@ -51,3 +51,48 @@ measurement that settled it.
   `about2.png` after. Offsets are now computed from `offsetLeft`/`offsetWidth`
   (unaffected by transforms) so the pair starts centred as "ABOUT ME" at any
   width.
+
+## 2026-10-23: Redesign — the water canvas never showed
+
+- **Broke:** the first captures of the dark redesign showed a flat background;
+  no caustics, no gold rope.
+- **First thought:** headless Chrome had no WebGL, or the shader failed to
+  compile and `startWater` returned early.
+- **Settled by:** a probe reported `webgl: true` and a 1440x900 canvas, so the
+  shader was drawing. The `body` background was painting over the
+  `position: fixed; z-index: -1` canvas (in-flow block backgrounds paint above
+  negative z-index children of the root). Removing the body background (the
+  `html` element keeps the colour) made the water appear.
+
+## 2026-10-23: Redesign — rope crossed the project text
+
+- **Broke:** mid-Work, the gold rope ran through the slide title.
+- **First thought:** the arc height constants were wrong.
+- **Settled by:** the rope sat at 0.33 of the height, which matches neither the
+  Work arc (0.035) nor the lane height (0.15) but does match a half-done
+  Work→Contact blend. A pinned section's height includes its pin distance, so
+  phase 2.45 arrived halfway through the Work pin. The shader bands were moved
+  to start after each pinned scene ends (Work pin ends at about 72% of the
+  section).
+
+## 2026-10-23: Redesign — "the slides jump straight to 4/4"
+
+- **Broke (apparently):** three consecutive scroll captures all showed slide 4.
+- **First thought:** the ring tween finished early, so the pin outlived it.
+- **Settled by:** a probe stepping 300 px through the pin read scrollY and the
+  counter: ScrollTrigger snap moved each stop to 2340 / 3105 / 3870 / 4635
+  (one slide each, 765 px apart). The ring was right; the evenly spaced
+  captures happened to snap to the last slide. Not a defect.
+
+## 2026-10-23: Portrait gone after scrolling back to About
+
+- **Broke:** the About portrait faded out on scroll as intended, but stayed
+  invisible after scrolling back to the top (reported by Arya).
+- **First thought:** the scroll trigger's start/end were wrong, so progress
+  never returned to 0.
+- **Settled by:** `scripts/check-portrait.mjs` read the computed opacity: 1 on
+  load, 0.15 scrolled down, 0 back at the top. Progress did return to 0, but
+  the scrubbed `.to()` had recorded its start value while the intro `.from()`
+  held the portrait at opacity 0. Replaced with `fromTo({opacity: 1})` and
+  `immediateRender: false`; the check now reads 1 / 0.15 / 1. Confirmed the
+  check fails on the old code before the fix.
