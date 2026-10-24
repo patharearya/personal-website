@@ -12,7 +12,8 @@ uniform vec2 res;
 uniform float t, phase, act, dpr;
 uniform vec2 mouse;
 
-// Iterated domain warp: bright filaments where the warped field folds.
+// Iterated domain warp: bright filaments where the warped field folds. Returns the
+// raw field; a high power gives crisp light lines, a low power the broad dapple.
 float caustic(vec2 p, float time) {
   vec2 i = p;
   float c = 1.0;
@@ -23,7 +24,7 @@ float caustic(vec2 p, float time) {
   }
   c /= 4.0;
   c = 1.17 - pow(c, 1.4);
-  return pow(abs(c), 9.0);
+  return clamp(abs(c), 0.0, 1.0);
 }
 
 float band(float a, float b, float x) { return smoothstep(a, b, x); }
@@ -56,24 +57,46 @@ void main() {
   vec2 cp = uv;
   cp.x = mix(cp.x, cp.x * 0.22 + t * 0.03, lane);
   cp.y = mix(cp.y, cp.y * 1.6, lane);
-  float light = caustic(cp * 6.2832 * 1.6 - 250.0, t * 0.22 + 23.0);
-  light = clamp(light, 0.0, 1.0);
+  // Sunlit shallow water: crisp light lines, with dappled shadow between them.
+  // The red and blue parts of the light land a hair apart, so the brightest
+  // lines carry a faint prism fringe.
+  vec2 cq = cp * 6.2832 * 1.6 - 250.0;
+  float ct = t * 0.22 + 23.0;
+  float raw = caustic(cq, ct);
+  float light = pow(raw, 9.0);
+  float lr = pow(caustic(cq + vec2(0.035, 0.0), ct), 9.0);
+  float lb = pow(caustic(cq - vec2(0.035, 0.0), ct), 9.0);
+  float dapple = pow(raw, 2.2);
+
+  // A sunspot follows the pointer: the light gathers and brightens around it.
+  vec2 sd = uv - m;
+  float spot = exp(-dot(sd, sd) * 26.0);
+  float sun = 1.0 + 2.2 * spot;
 
   // Depth: brighter toward the surface (top), darker at the floor; contact dims.
   float surfaceGlow = mix(0.55, 1.0, gl_FragCoord.y / res.y);
   float dim = 1.0 - 0.6 * band(2.75, 3.0, phase);
-  vec3 deep = vec3(0.027, 0.043, 0.063);
-  vec3 water = vec3(0.059, 0.094, 0.125);
+  vec3 deep = vec3(0.84, 0.79, 0.7);
+  vec3 water = vec3(0.92, 0.88, 0.81);
   vec3 col = mix(deep, water, surfaceGlow * 0.8);
-  col += vec3(0.62, 0.76, 0.82) * light * 0.34 * surfaceGlow * dim;
+  col *= 1.0 - 0.09 * (1.0 - dapple) * dim;
+  vec3 prism = vec3(lr, light, lb);
+  col += mix(vec3(light), prism, 0.55) * vec3(1.0, 0.97, 0.9) * 0.42 * surfaceGlow * dim * sun;
+  // The sunspot itself: a warm pool of light, with the dapple shade lifted inside it.
+  col += vec3(0.11, 0.09, 0.05) * spot * (0.6 + 0.4 * dapple);
+
+  // Fine sand on the floor: a still speckle under the moving light.
+  float grain = fract(sin(dot(floor(gl_FragCoord.xy / max(dpr, 1.0)), vec2(12.9898, 78.233))) * 43758.5453);
+  float speck = fract(sin(dot(floor(gl_FragCoord.xy / (3.0 * max(dpr, 1.0))), vec2(39.3468, 11.135))) * 24634.6345);
+  col *= 1.0 + (grain - 0.5) * 0.035 + (speck - 0.5) * 0.025;
 
   // Snell's window: looking up, the surface is a brighter disc overhead.
   vec2 w = (gl_FragCoord.xy - vec2(0.5 * res.x, 1.15 * res.y)) / res.y;
-  col += vec3(0.09, 0.13, 0.16) * (1.0 - smoothstep(0.35, 1.05, length(w))) * dim;
+  col += vec3(0.04, 0.035, 0.025) * (1.0 - smoothstep(0.35, 1.05, length(w))) * dim;
 
   // Vignette, as if looking up through the water column.
   vec2 q = gl_FragCoord.xy / res - 0.5;
-  col *= 1.0 - 0.55 * dot(q, q);
+  col *= 1.0 - 0.22 * dot(q, q);
 
   // Lane rope: a string of rounded floats in two golds, each lit from above with
   // a soft shadow on the water below it; brighter near the pointer.
@@ -89,7 +112,7 @@ void main() {
   float shadow = exp(-pow((px + 6.0) / 3.5, 2.0)) * 0.35;
   float glow = exp(-abs(px) * 0.2) * 0.12;
   float near = 1.0 + 0.8 * exp(-pow(uv.x - m.x, 2.0) * 30.0);
-  vec3 gold = vec3(0.784, 0.643, 0.388);
+  vec3 gold = vec3(0.6, 0.44, 0.18);
   col *= 1.0 - shadow * (1.0 - bead);
   col = mix(col, gold * lit * alt * near, bead * 0.92);
   col += gold * glow * near * 0.6;
@@ -103,36 +126,48 @@ export function startWater(canvas: HTMLCanvasElement, animate: boolean, phaseOf:
   const gl = canvas.getContext('webgl', { antialias: false, alpha: false })
   if (!gl) return () => {} // the CSS background on the canvas stands in
 
-  const compile = (type: number, src: string) => {
-    const s = gl.createShader(type)!
-    gl.shaderSource(s, src)
-    gl.compileShader(s)
-    return s
+  // Program, buffer and uniforms. Run again after a lost context is restored: the
+  // browser drops WebGL contexts under GPU pressure, and the water must come back.
+  let U: Record<string, WebGLUniformLocation | null> = {}
+  let ok = false
+  const setup = () => {
+    const compile = (type: number, src: string) => {
+      const sh = gl.createShader(type)!
+      gl.shaderSource(sh, src)
+      gl.compileShader(sh)
+      return sh
+    }
+    const prog = gl.createProgram()!
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT))
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG))
+    gl.linkProgram(prog)
+    ok = !!gl.getProgramParameter(prog, gl.LINK_STATUS)
+    if (!ok) {
+      if (!gl.isContextLost()) console.error('water shader:', gl.getProgramInfoLog(prog))
+      return
+    }
+    gl.useProgram(prog)
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
+    const loc = gl.getAttribLocation(prog, 'p')
+    gl.enableVertexAttribArray(loc)
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0)
+    U = Object.fromEntries(['res', 't', 'phase', 'act', 'dpr', 'mouse'].map((n) => [n, gl.getUniformLocation(prog, n)]))
   }
-  const prog = gl.createProgram()!
-  gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT))
-  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG))
-  gl.linkProgram(prog)
-  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return () => {}
-  gl.useProgram(prog)
+  setup()
+  if (!ok) return () => {}
 
-  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
-  const loc = gl.getAttribLocation(prog, 'p')
-  gl.enableVertexAttribArray(loc)
-  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0)
-  const u = (n: string) => gl.getUniformLocation(prog, n)
-  const [uRes, uT, uPhase, uAct, uDpr, uMouse] = ['res', 't', 'phase', 'act', 'dpr', 'mouse'].map(u)
-
-  // ponytail: DPR capped at 1; the light is soft, so more pixels buy nothing visible.
+  // ponytail: rendered at 75% of CSS pixels and stretched; the light is soft, so the
+  // saved GPU work (about 40%) costs nothing visible. Raise SCALE if edges look soft.
+  const SCALE = 0.75
   let dpr = 1
   const resize = () => {
-    dpr = Math.min(window.devicePixelRatio || 1, 1)
+    dpr = Math.min(window.devicePixelRatio || 1, 1) * SCALE
     canvas.width = Math.max(1, Math.round(canvas.clientWidth * dpr))
     canvas.height = Math.max(1, Math.round(canvas.clientHeight * dpr))
     gl.viewport(0, 0, canvas.width, canvas.height)
-    gl.uniform2f(uRes, canvas.width, canvas.height)
-    gl.uniform1f(uDpr, dpr)
+    gl.uniform2f(U.res, canvas.width, canvas.height)
+    gl.uniform1f(U.dpr, dpr)
   }
 
   // Pointer: eased position, and an activity level that rises with movement and decays.
@@ -151,10 +186,11 @@ export function startWater(canvas: HTMLCanvasElement, animate: boolean, phaseOf:
     m.x += (target.x - m.x) * 0.08
     m.y += (target.y - m.y) * 0.08
     act += ((performance.now() - lastMove < 120 ? 1 : 0) - act) * 0.04
-    gl.uniform1f(uT, ms / 1000)
-    gl.uniform1f(uPhase, phaseOf())
-    gl.uniform1f(uAct, animate ? act : 0)
-    gl.uniform2f(uMouse, m.x * dpr, canvas.height - m.y * dpr)
+    if (!ok || gl.isContextLost()) return
+    gl.uniform1f(U.t, ms / 1000)
+    gl.uniform1f(U.phase, phaseOf())
+    gl.uniform1f(U.act, animate ? act : 0)
+    gl.uniform2f(U.mouse, m.x * dpr, canvas.height - m.y * dpr)
     gl.drawArrays(gl.TRIANGLES, 0, 3)
   }
 
@@ -176,7 +212,19 @@ export function startWater(canvas: HTMLCanvasElement, animate: boolean, phaseOf:
     addEventListener('scroll', still, { passive: true })
   }
 
+  // preventDefault on loss is what allows the browser to restore the context later.
+  const onLost = (e: Event) => e.preventDefault()
+  const onRestored = () => {
+    setup()
+    resize()
+    if (!animate) still()
+  }
+  canvas.addEventListener('webglcontextlost', onLost)
+  canvas.addEventListener('webglcontextrestored', onRestored)
+
   return () => {
+    canvas.removeEventListener('webglcontextlost', onLost)
+    canvas.removeEventListener('webglcontextrestored', onRestored)
     cancelAnimationFrame(raf)
     ro.disconnect()
     removeEventListener('pointermove', onMove)

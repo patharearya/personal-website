@@ -82,22 +82,6 @@ export const projects: Project[] = [
     video: '/media/voice.mp4',
   },
   {
-    id: 'agent',
-    title: 'AI Investment Research Agent',
-    when: 'Jul – Aug 2026',
-    claim:
-      'Five LangGraph agents turn an investor profile into plain-language research briefs, and may recommend nothing, saying why.',
-    note: 'Models judge; Python computes. Every claim cites what it read, and I wrote up all 74 defects it hit.',
-    stack: 'Python · LangGraph · FastAPI · Render',
-    links: [
-      { label: 'Live demo', href: 'https://ai-investment-agent-gdjr.onrender.com' },
-      { label: 'Code', href: 'https://github.com/patharearya/ai-investment-agent' },
-    ],
-    image: '/media/agent.jpg',
-    imageAlt: 'A research brief with one condition highlighted and its source: "Every claim cites what it read."',
-    video: '/media/agent.mp4',
-  },
-  {
     id: 'aqua',
     title: 'Aqua Static',
     when: 'Oct 2026 · HackNC 2026',
@@ -110,8 +94,9 @@ export const projects: Project[] = [
       { label: 'Live demo', href: 'https://aqua-static-hack-nc-2026-pied.vercel.app' },
       { label: 'Code', href: 'https://github.com/arham-hi/AquaStatic-HackNC2026' },
     ],
-    image: '/media/aqua.png',
-    imageAlt: 'Aqua Static home screen: "Your campus. In real time." beside Aqua, a cartoon radio mascot.',
+    image: '/media/aqua.jpg',
+    imageAlt: 'Aqua Static launch video: the live 3D campus map under the headline "Your campus. In real time."',
+    video: '/media/aqua.mp4',
   },
   {
     id: 'finder',
@@ -129,5 +114,21 @@ export const projects: Project[] = [
     imageAlt: 'Internship & Research Finder: a river of coloured points, one per open posting, over the headline "Internships in your field, straight from the source."',
     video: '/media/finder.mp4',
     start: 4,
+  },
+  {
+    id: 'agent',
+    title: 'AI Investment Research Agent',
+    when: 'Jul – Aug 2026',
+    claim:
+      'Five LangGraph agents turn an investor profile into plain-language research briefs, and may recommend nothing, saying why.',
+    note: 'Models judge; Python computes. Every claim cites what it read, and I wrote up all 74 defects it hit.',
+    stack: 'Python · LangGraph · FastAPI · Render',
+    links: [
+      { label: 'Live demo', href: 'https://ai-investment-agent-gdjr.onrender.com' },
+      { label: 'Code', href: 'https://github.com/patharearya/ai-investment-agent' },
+    ],
+    image: '/media/agent.jpg',
+    imageAlt: 'A research brief with one condition highlighted and its source: "Every claim cites what it read."',
+    video: '/media/agent.mp4',
   },
 ]

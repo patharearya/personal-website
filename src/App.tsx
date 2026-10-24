@@ -117,7 +117,7 @@ export default function App() {
       <main>
         <section className="about" id="about" aria-labelledby="about-title" data-phase>
           <h1 className="visually-hidden">Arya Pathare</h1>
-          <img className="about__portrait" src="/media/arya.png" alt="Arya Pathare, in black and white." width={440} height={410} />
+          <img className="about__portrait" src="/media/arya.png" alt="Arya Pathare." width={440} height={410} />
           <div className="about__body">
             <h2 className="display about__title" id="about-title">
               About me

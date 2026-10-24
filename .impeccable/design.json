@@ -4,37 +4,180 @@
   "title": "Design System: Arya Pathare",
   "extensions": {
     "colorMeta": {
-      "pool-ground": { "role": "neutral", "displayName": "Pool Ground", "canonical": "#070b10", "tonalRamp": ["#070b10", "#111a24", "#1f2c3a", "#344555", "#506373", "#738594", "#9eadb8", "#d3dbe1"] },
-      "pool-depth": { "role": "neutral", "displayName": "Pool Depth", "canonical": "#0f1820", "tonalRamp": ["#070c11", "#0f1820", "#1d2b37", "#33444f", "#4f616d", "#73848f", "#9eacb5", "#d2dade"] },
-      "surface-white": { "role": "neutral", "displayName": "Surface White", "canonical": "#e3eaed", "tonalRamp": ["#1a2023", "#30383c", "#4b5458", "#6a7478", "#8d969a", "#b1babd", "#d2dadd", "#e3eaed"] },
-      "tile-grey": { "role": "neutral", "displayName": "Tile Grey", "canonical": "#8b9ca6", "tonalRamp": ["#151c21", "#27323a", "#3e4c55", "#586872", "#73848e", "#8b9ca6", "#b4c1c8", "#dde5e9"] },
-      "lane-rope-gold": { "role": "primary", "displayName": "Lane-Rope Gold", "canonical": "#c8a463", "tonalRamp": ["#2a1f0c", "#463619", "#665029", "#896d3d", "#ab8a50", "#c8a463", "#d6b577", "#efe0c2"] },
-      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "rgb(223 231 234 / 0.14)", "tonalRamp": ["rgb(223 231 234 / 0.06)", "rgb(223 231 234 / 0.10)", "rgb(223 231 234 / 0.14)", "rgb(223 231 234 / 0.22)", "rgb(223 231 234 / 0.35)", "rgb(223 231 234 / 0.5)", "rgb(223 231 234 / 0.7)", "rgb(223 231 234 / 0.9)"] }
+      "sand-ground": {
+        "role": "neutral",
+        "displayName": "Sand Ground",
+        "canonical": "#ece5d8",
+        "tonalRamp": [
+          "#ece5d8",
+          "#111a24",
+          "#1f2c3a",
+          "#344555",
+          "#506373",
+          "#738594",
+          "#9eadb8",
+          "#d3dbe1"
+        ]
+      },
+      "sand-depth": {
+        "role": "neutral",
+        "displayName": "Sand Depth",
+        "canonical": "#e2d8c6",
+        "tonalRamp": [
+          "#070c11",
+          "#e2d8c6",
+          "#1d2b37",
+          "#33444f",
+          "#4f616d",
+          "#73848f",
+          "#9eacb5",
+          "#d2dade"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#1f1b16",
+        "tonalRamp": [
+          "#1a2023",
+          "#30383c",
+          "#4b5458",
+          "#6a7478",
+          "#8d969a",
+          "#b1babd",
+          "#d2dadd",
+          "#1f1b16"
+        ]
+      },
+      "driftwood": {
+        "role": "neutral",
+        "displayName": "Driftwood",
+        "canonical": "#675d50",
+        "tonalRamp": [
+          "#151c21",
+          "#27323a",
+          "#3e4c55",
+          "#586872",
+          "#73848e",
+          "#675d50",
+          "#b4c1c8",
+          "#dde5e9"
+        ]
+      },
+      "lane-rope-bronze": {
+        "role": "primary",
+        "displayName": "Lane-Rope Bronze",
+        "canonical": "#8a6428",
+        "tonalRamp": [
+          "#2a1f0c",
+          "#463619",
+          "#665029",
+          "#896d3d",
+          "#ab8a50",
+          "#8a6428",
+          "#9c7433",
+          "#efe0c2"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgb(31 27 22 / 0.14)",
+        "tonalRamp": [
+          "rgb(31 27 22 / 0.06)",
+          "rgb(31 27 22 / 0.10)",
+          "rgb(31 27 22 / 0.14)",
+          "rgb(31 27 22 / 0.22)",
+          "rgb(31 27 22 / 0.35)",
+          "rgb(31 27 22 / 0.5)",
+          "rgb(31 27 22 / 0.7)",
+          "rgb(31 27 22 / 0.9)"
+        ]
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "One section heading per section; light and tightly tracked, balanced wrap." },
-      "headline": { "displayName": "Headline", "purpose": "Moment titles in the sideways band." },
-      "title": { "displayName": "Title", "purpose": "Project names under slide media." },
-      "lead": { "displayName": "Lead", "purpose": "The opening About paragraph, max 34em." },
-      "body": { "displayName": "Body", "purpose": "Reading text; 30-38em measure." },
-      "label": { "displayName": "Label", "purpose": "Bar, dates, stacks, links, footer; mixed case, usually Tile Grey; counter uses tabular numerals." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "One section heading per section; light and tightly tracked, balanced wrap."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Moment titles in the sideways band."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Project names under slide media."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The opening About paragraph, max 34em."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading text; 30-38em measure."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Bar, dates, stacks, links, footer; mixed case, usually Driftwood; counter uses tabular numerals."
+      }
     },
     "shadows": [
-      { "name": "media-ring", "value": "0 0 0 1px rgb(223 231 234 / 0.14), 0 30px 60px -30px rgb(0 0 0 / 0.8)", "purpose": "Every project media frame: hairline ring plus a long soft drop." },
-      { "name": "media-ring-active", "value": "0 0 0 1px rgb(200 164 99 / 0.7), 0 30px 60px -30px rgb(0 0 0 / 0.8)", "purpose": "The slide in view; 0.6s transition." },
-      { "name": "focus", "value": "outline: 2px solid #c8a463; outline-offset: 4px; border-radius: 2px", "purpose": "Global :focus-visible." }
+      {
+        "name": "media-ring",
+        "value": "0 0 0 1px rgb(31 27 22 / 0.14), 0 30px 60px -30px rgb(70 52 28 / 0.35)",
+        "purpose": "Every project media frame: hairline ring plus a long soft drop."
+      },
+      {
+        "name": "media-ring-active",
+        "value": "0 0 0 1px rgb(138 100 40 / 0.7), 0 30px 60px -30px rgb(70 52 28 / 0.35)",
+        "purpose": "The slide in view; 0.6s transition."
+      },
+      {
+        "name": "focus",
+        "value": "outline: 2px solid #8a6428; outline-offset: 4px; border-radius: 2px",
+        "purpose": "Global :focus-visible."
+      }
     ],
     "motion": [
-      { "name": "ease-house", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "All interface transitions: 0.3s hover, 0.6s slide state." },
-      { "name": "surface-in", "value": "from y:28 opacity:0 blur(8px), 1.6s expo.out, stagger 0.12s", "purpose": "About block rising out of the water once on load (full scenes only)." },
-      { "name": "moments-pin", "value": "pinned 100svh, horizontal translate, scrub 0.8", "purpose": "Where I've been runs sideways while the page holds." },
-      { "name": "lane-snap", "value": "cylinder R = 1.15 x viewport width, perspective 1500px, scrub 0.9, snap per slide 0.3-0.8s power3.inOut", "purpose": "Project lane turns with scroll and always rests on a slide." },
-      { "name": "water-phase", "value": "phase 0..3 by section scroll; caustics, lane streaks, rope arc, surface line", "purpose": "One shader morphing across the page; one still frame per scroll step under reduced motion." }
+      {
+        "name": "ease-house",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "All interface transitions: 0.3s hover, 0.6s slide state."
+      },
+      {
+        "name": "surface-in",
+        "value": "from y:28 opacity:0 blur(8px), 1.6s expo.out, stagger 0.12s",
+        "purpose": "About block rising out of the water once on load (full scenes only)."
+      },
+      {
+        "name": "moments-pin",
+        "value": "pinned 100svh, horizontal translate, scrub 0.8",
+        "purpose": "Where I've been runs sideways while the page holds."
+      },
+      {
+        "name": "lane-snap",
+        "value": "cylinder R = 1.15 x viewport width, perspective 1500px, scrub 0.9, snap per slide 0.3-0.8s power3.inOut",
+        "purpose": "Project lane turns with scroll and always rests on a slide."
+      },
+      {
+        "name": "water-phase",
+        "value": "phase 0..3 by section scroll; caustics, lane streaks, rope arc, surface line",
+        "purpose": "One shader morphing across the page; one still frame per scroll step under reduced motion."
+      }
     ],
     "breakpoints": [
-      { "name": "nav-collapse", "value": "720px" },
-      { "name": "scenes", "value": "900px (and prefers-reduced-motion: no-preference)" },
-      { "name": "short-viewport", "value": "max-height 780px" }
+      {
+        "name": "nav-collapse",
+        "value": "720px"
+      },
+      {
+        "name": "scenes",
+        "value": "900px (and prefers-reduced-motion: no-preference)"
+      },
+      {
+        "name": "short-viewport",
+        "value": "max-height 780px"
+      }
     ]
   },
   "components": [
@@ -42,17 +185,17 @@
       "name": "Primary Pill",
       "kind": "button",
       "refersTo": "pill-gold",
-      "description": "The single gold action on the page: the email link at Contact.",
+      "description": "The single bronze action on the page: the email link at Contact.",
       "html": "<a class=\"ds-pill ds-pill--gold\" href=\"#\">patharearya@gmail.com</a>",
-      "css": ".ds-pill { display: inline-flex; align-items: center; gap: 0.5em; min-height: 44px; padding: 0.6rem 1.25rem; border: 1px solid rgb(223 231 234 / 0.14); border-radius: 999px; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-size: 0.9375rem; color: #e3eaed; text-decoration: none; transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1); } .ds-pill--gold { background: #c8a463; border-color: #c8a463; color: #070b10; font-weight: 500; } .ds-pill--gold:hover { background: #d6b577; border-color: #d6b577; } .ds-pill:focus-visible { outline: 2px solid #c8a463; outline-offset: 4px; }"
+      "css": ".ds-pill { display: inline-flex; align-items: center; gap: 0.5em; min-height: 44px; padding: 0.6rem 1.25rem; border: 1px solid rgb(31 27 22 / 0.14); border-radius: 999px; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-size: 0.9375rem; color: #1f1b16; text-decoration: none; transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1); } .ds-pill--gold { background: #8a6428; border-color: #8a6428; color: #ece5d8; font-weight: 500; } .ds-pill--gold:hover { background: #9c7433; border-color: #9c7433; } .ds-pill:focus-visible { outline: 2px solid #8a6428; outline-offset: 4px; }"
     },
     {
       "name": "Secondary Pill",
       "kind": "button",
       "refersTo": "pill",
       "description": "Hairline capsule for Résumé, LinkedIn, GitHub at Contact.",
-      "html": "<div style=\"background:#070b10;padding:24px\"><a class=\"ds-pill2\" href=\"#\">GitHub <svg width=\"14\" height=\"14\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M4.5 11.5 11.5 4.5M5.5 4.5h6v6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\"/></svg></a></div>",
-      "css": ".ds-pill2 { display: inline-flex; align-items: center; gap: 0.5em; min-height: 44px; padding: 0.6rem 1.25rem; border: 1px solid rgb(223 231 234 / 0.14); border-radius: 999px; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-size: 0.9375rem; color: #e3eaed; text-decoration: none; transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1); } .ds-pill2:hover { border-color: rgb(223 231 234 / 0.5); } .ds-pill2:focus-visible { outline: 2px solid #c8a463; outline-offset: 4px; }"
+      "html": "<div style=\"background:#ece5d8;padding:24px\"><a class=\"ds-pill2\" href=\"#\">GitHub <svg width=\"14\" height=\"14\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M4.5 11.5 11.5 4.5M5.5 4.5h6v6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\"/></svg></a></div>",
+      "css": ".ds-pill2 { display: inline-flex; align-items: center; gap: 0.5em; min-height: 44px; padding: 0.6rem 1.25rem; border: 1px solid rgb(31 27 22 / 0.14); border-radius: 999px; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-size: 0.9375rem; color: #1f1b16; text-decoration: none; transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1); } .ds-pill2:hover { border-color: rgb(31 27 22 / 0.5); } .ds-pill2:focus-visible { outline: 2px solid #8a6428; outline-offset: 4px; }"
     },
     {
       "name": "Top Bar",
@@ -60,52 +203,72 @@
       "refersTo": "nav-link",
       "description": "Fixed thin bar fading into the water; name, centred section links, Résumé.",
       "html": "<header class=\"ds-bar\"><a class=\"ds-bar__name\" href=\"#\">Arya Pathare</a><nav class=\"ds-bar__nav\"><a href=\"#\">About</a><a href=\"#\">Where I’ve been</a><a href=\"#\">Work</a><a href=\"#\">Contact</a></nav><a class=\"ds-bar__cv\" href=\"#\">Résumé</a></header>",
-      "css": ".ds-bar { display: flex; align-items: center; gap: 2rem; padding: 18px 32px 48px; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-size: 0.875rem; color: #e3eaed; background: linear-gradient(#070b10 30%, rgb(7 11 16 / 0.85) 55%, rgb(7 11 16 / 0)); } .ds-bar a { color: inherit; text-decoration: none; } .ds-bar__name { font-weight: 500; letter-spacing: -0.01em; } .ds-bar__nav { display: flex; gap: 1.75rem; margin-inline: auto; } .ds-bar__nav a, .ds-bar .ds-bar__cv { color: #8b9ca6; transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1); } .ds-bar__nav a:hover, .ds-bar .ds-bar__cv:hover { color: #e3eaed; } .ds-bar a:focus-visible { outline: 2px solid #c8a463; outline-offset: 4px; border-radius: 2px; }"
+      "css": ".ds-bar { display: flex; align-items: center; gap: 2rem; padding: 18px 32px 48px; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-size: 0.875rem; color: #1f1b16; background: linear-gradient(#ece5d8 30%, rgb(7 11 16 / 0.85) 55%, rgb(7 11 16 / 0)); } .ds-bar a { color: inherit; text-decoration: none; } .ds-bar__name { font-weight: 500; letter-spacing: -0.01em; } .ds-bar__nav { display: flex; gap: 1.75rem; margin-inline: auto; } .ds-bar__nav a, .ds-bar .ds-bar__cv { color: #675d50; transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1); } .ds-bar__nav a:hover, .ds-bar .ds-bar__cv:hover { color: #1f1b16; } .ds-bar a:focus-visible { outline: 2px solid #8a6428; outline-offset: 4px; border-radius: 2px; }"
     },
     {
       "name": "Moment",
       "kind": "custom",
       "description": "One item of the sideways band: hairline on top, headline, place and date, one line.",
-      "html": "<div style=\"background:#070b10;padding:24px\"><div class=\"ds-moment\"><h3>Won at HackNC</h3><p class=\"ds-moment__where\">MLH Best Use of ElevenLabs · Oct 2026</p><p class=\"ds-moment__line\">Pitched the idea that became Aqua Static, then built it with a team of four.</p></div></div>",
-      "css": ".ds-moment { max-width: 24rem; padding-top: 1.25rem; border-top: 1px solid rgb(223 231 234 / 0.14); font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; color: #e3eaed; font-size: 1.0625rem; line-height: 1.6; } .ds-moment h3 { margin: 0; font-weight: 350; font-size: 2rem; line-height: 1.05; letter-spacing: -0.02em; } .ds-moment__where { margin: 0.4rem 0 0; color: #8b9ca6; font-size: 0.9375rem; } .ds-moment__line { margin: 1.25rem 0 0; }"
+      "html": "<div style=\"background:#ece5d8;padding:24px\"><div class=\"ds-moment\"><h3>Won at HackNC</h3><p class=\"ds-moment__where\">MLH Best Use of ElevenLabs · Oct 2026</p><p class=\"ds-moment__line\">Pitched the idea that became Aqua Static, then built it with a team of four.</p></div></div>",
+      "css": ".ds-moment { max-width: 24rem; padding-top: 1.25rem; border-top: 1px solid rgb(31 27 22 / 0.14); font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; color: #1f1b16; font-size: 1.0625rem; line-height: 1.6; } .ds-moment h3 { margin: 0; font-weight: 350; font-size: 2rem; line-height: 1.05; letter-spacing: -0.02em; } .ds-moment__where { margin: 0.4rem 0 0; color: #675d50; font-size: 0.9375rem; } .ds-moment__line { margin: 1.25rem 0 0; }"
     },
     {
       "name": "Project Slide",
       "kind": "card",
       "refersTo": "slide-media",
-      "description": "16:9 media with hairline ring (gold when active), title, date line, claim, stack and links.",
-      "html": "<div style=\"background:#070b10;padding:24px\"><div class=\"ds-slide is-active\"><div class=\"ds-slide__media\"></div><h3>Aqua Static</h3><p class=\"ds-slide__when\"><b>Winner, MLH Best Use of ElevenLabs</b> · Oct 2026</p><p class=\"ds-slide__claim\">A live 3D map of UNC where students post what they need in plain English.</p><p class=\"ds-slide__foot\"><span>TypeScript · Next.js · Three.js</span><a href=\"#\">Live demo</a></p></div></div>",
-      "css": ".ds-slide { max-width: 34rem; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; color: #e3eaed; font-size: 1.0625rem; line-height: 1.6; } .ds-slide__media { aspect-ratio: 16 / 9; border-radius: 4px; background: #0f1820; box-shadow: 0 0 0 1px rgb(223 231 234 / 0.14), 0 30px 60px -30px rgb(0 0 0 / 0.8); transition: box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1); } .ds-slide.is-active .ds-slide__media, .ds-slide:hover .ds-slide__media { box-shadow: 0 0 0 1px rgb(200 164 99 / 0.7), 0 30px 60px -30px rgb(0 0 0 / 0.8); } .ds-slide h3 { margin: 1.25rem 0 0; font-weight: 400; font-size: 1.75rem; line-height: 1.1; letter-spacing: -0.02em; } .ds-slide__when { margin: 0.35rem 0 0; font-size: 0.8125rem; color: #8b9ca6; } .ds-slide__when b { color: #e3eaed; font-weight: 500; } .ds-slide__claim { margin: 0.9rem 0 0; } .ds-slide__foot { margin: 1rem 0 0; display: flex; justify-content: space-between; font-size: 0.8125rem; color: #8b9ca6; } .ds-slide__foot a { color: #e3eaed; text-decoration: underline; text-decoration-color: rgb(223 231 234 / 0.14); text-underline-offset: 0.3em; transition: text-decoration-color 0.3s cubic-bezier(0.16, 1, 0.3, 1); } .ds-slide__foot a:hover { text-decoration-color: #e3eaed; } .ds-slide__foot a:focus-visible { outline: 2px solid #c8a463; outline-offset: 4px; border-radius: 2px; }"
+      "description": "16:9 media with hairline ring (bronze when active), title, date line, claim, stack and links.",
+      "html": "<div style=\"background:#ece5d8;padding:24px\"><div class=\"ds-slide is-active\"><div class=\"ds-slide__media\"></div><h3>Aqua Static</h3><p class=\"ds-slide__when\"><b>Winner, MLH Best Use of ElevenLabs</b> · Oct 2026</p><p class=\"ds-slide__claim\">A live 3D map of UNC where students post what they need in plain English.</p><p class=\"ds-slide__foot\"><span>TypeScript · Next.js · Three.js</span><a href=\"#\">Live demo</a></p></div></div>",
+      "css": ".ds-slide { max-width: 34rem; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; color: #1f1b16; font-size: 1.0625rem; line-height: 1.6; } .ds-slide__media { aspect-ratio: 16 / 9; border-radius: 4px; background: #e2d8c6; box-shadow: 0 0 0 1px rgb(31 27 22 / 0.14), 0 30px 60px -30px rgb(70 52 28 / 0.35); transition: box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1); } .ds-slide.is-active .ds-slide__media, .ds-slide:hover .ds-slide__media { box-shadow: 0 0 0 1px rgb(138 100 40 / 0.7), 0 30px 60px -30px rgb(70 52 28 / 0.35); } .ds-slide h3 { margin: 1.25rem 0 0; font-weight: 400; font-size: 1.75rem; line-height: 1.1; letter-spacing: -0.02em; } .ds-slide__when { margin: 0.35rem 0 0; font-size: 0.8125rem; color: #675d50; } .ds-slide__when b { color: #1f1b16; font-weight: 500; } .ds-slide__claim { margin: 0.9rem 0 0; } .ds-slide__foot { margin: 1rem 0 0; display: flex; justify-content: space-between; font-size: 0.8125rem; color: #675d50; } .ds-slide__foot a { color: #1f1b16; text-decoration: underline; text-decoration-color: rgb(31 27 22 / 0.14); text-underline-offset: 0.3em; transition: text-decoration-color 0.3s cubic-bezier(0.16, 1, 0.3, 1); } .ds-slide__foot a:hover { text-decoration-color: #1f1b16; } .ds-slide__foot a:focus-visible { outline: 2px solid #8a6428; outline-offset: 4px; border-radius: 2px; }"
     },
     {
       "name": "Display Heading",
       "kind": "custom",
       "refersTo": "display",
       "description": "Section heading over the water; nothing sits above it.",
-      "html": "<div style=\"background:radial-gradient(120% 90% at 50% 0%, #0f1820, #070b10);padding:32px\"><h2 class=\"ds-display\">About me</h2></div>",
-      "css": ".ds-display { margin: 0; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-weight: 300; font-size: clamp(3rem, 8vw, 6rem); line-height: 0.95; letter-spacing: -0.035em; color: #e3eaed; text-wrap: balance; }"
+      "html": "<div style=\"background:radial-gradient(120% 90% at 50% 0%, #e2d8c6, #ece5d8);padding:32px\"><h2 class=\"ds-display\">About me</h2></div>",
+      "css": ".ds-display { margin: 0; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-weight: 300; font-size: clamp(3rem, 8vw, 6rem); line-height: 0.95; letter-spacing: -0.035em; color: #1f1b16; text-wrap: balance; }"
     }
   ],
   "narrative": {
-    "northStar": "The Night Lap Pool",
-    "overview": "The page is a pool at night seen from the bottom. The visitor looks up through blue-black water while pale caustic light moves overhead, and a gold lane rope made of rounded floats runs across the screen as the one guide from About to Contact. Everything visual is in one fixed WebGL canvas behind the content. The interface itself stays quiet: cool white type, blue-grey secondary text, hairline rules, and gold used only where the rope or the visitor's next step is.\n\nDensity is low. Each viewport holds one block set off-centre against empty water: the About text sits low and left of centre, the moments run as one band, the projects turn on one curved lane, and Contact sits at the bottom near the rope line. Motion follows the water. Content rises out of a blur at the start, the moments band moves sideways while the page is pinned, the project lane turns and always stops on a slide, and the shader changes through four states as you scroll.\n\nThe world rejects the dark developer portfolio of glowing cards, chips and neon, and it rejects the light Swiss sheet it replaced.",
+    "northStar": "Sunlit Shallows",
+    "overview": "The page is the sandy floor of sunlit shallow water. Crisp lines of sunlight move over warm sand, with soft dappled shade between them, a fine still sand grain underneath, and a faint prism fringe where the light is brightest. A bronze lane rope made of rounded floats runs across the screen as the one guide from About to Contact, and a soft sunspot follows the pointer. Everything visual is in one fixed WebGL canvas behind the content. The interface itself stays quiet: near-black ink type, warm grey-brown secondary text, hairline rules, and bronze used only where the rope or the visitor's next step is. (It began as a dark night-pool world; Arya switched it to light on 2026-10-23 because it was more vibrant and the dark version made the portrait look ghostly.)\n\nDensity is low. Each viewport holds one block set off-centre against empty water: the About text sits low and left of centre, the moments run as one band, the projects turn on one curved lane, and Contact sits at the bottom near the rope line. Motion follows the water. Content rises out of a blur at the start, the moments band moves sideways while the page is pinned, the project lane turns and always stops on a slide, and the shader changes through four states as you scroll.\n\nThe world rejects the developer portfolio of glowing cards, chips and neon, and the flat, textureless light page.",
     "keyCharacteristics": [
       "One fixed full-screen WebGL canvas holds all the art; nothing else paints a background over it.",
-      "Blue-black ground, cool white type, one muted gold.",
+      "Warm sand ground, ink type, one deep bronze.",
       "One variable grotesque face: light weights at display size, regular at reading size.",
       "Hairline rules and frameless type; no cards, no boxed sections, no section numbers.",
       "Scroll drives the scene. Pinned sideways band, curved project lane that snaps per slide, flat native scrollers as the fallback."
     ],
     "rules": [
-      { "name": "The One Thread Rule", "body": "Gold means \"follow this\" or \"this one.\" It marks the rope, the active slide, the current count, the primary action and focus. Nothing else is gold, and nothing decorative is gold.", "section": "colors" },
-      { "name": "The Water Owns the Background Rule", "body": "Body has no background. A section that paints its own fill covers the canvas. The only allowed local wash is a ground-colour radial pool behind text that would otherwise sit on a bright screenshot.", "section": "colors" },
-      { "name": "The Light-Large Rule", "body": "The bigger the type, the lighter the weight (300 display, 350 headline, 400 title and body). Never set display type in bold.", "section": "typography" },
-      { "name": "The No Kicker Rule", "body": "A section starts with its display heading. Nothing small, uppercase or numbered sits above it.", "section": "typography" },
-      { "name": "The Underwater Light Rule", "body": "Light comes from above, through the surface. Glows, highlights and shadows follow that direction. Nothing glows from inside a card.", "section": "elevation" }
+      {
+        "name": "The One Thread Rule",
+        "body": "Bronze means \"follow this\" or \"this one.\" It marks the rope, the active slide, the current count, the primary action and focus. Nothing else is bronze, and nothing decorative is bronze.",
+        "section": "colors"
+      },
+      {
+        "name": "The Water Owns the Background Rule",
+        "body": "Body has no background. A section that paints its own fill covers the canvas. The only allowed local wash is a ground-colour radial pool behind text that would otherwise sit on a bright screenshot.",
+        "section": "colors"
+      },
+      {
+        "name": "The Light-Large Rule",
+        "body": "The bigger the type, the lighter the weight (300 display, 350 headline, 400 title and body). Never set display type in bold.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Kicker Rule",
+        "body": "A section starts with its display heading. Nothing small, uppercase or numbered sits above it.",
+        "section": "typography"
+      },
+      {
+        "name": "The Underwater Light Rule",
+        "body": "Light comes from above, through the surface. Glows, highlights and shadows follow that direction. Nothing glows from inside a card.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "Do keep all art in the single fixed water canvas, and keep section backgrounds transparent.",
-      "Do spend gold only on the rope, the active slide, the current count, the one primary action, selection and focus.",
+      "Do spend bronze only on the rope, the active slide, the current count, the one primary action, selection and focus.",
       "Do set section headings in the light display style (300, -0.035em) with nothing above them.",
       "Do separate content with 1px hairline rules at 14% alpha instead of boxes.",
       "Do make every scroll-driven scene come to rest on an item, never between two.",
@@ -115,7 +278,7 @@
     "donts": [
       "Don't use glowing cards, chips, neon or gradient text. That is the dark developer portfolio this world rejects.",
       "Don't add kickers, eyebrows or section numbers above headings.",
-      "Don't add a second accent colour or a second gold-filled action.",
+      "Don't add a second accent colour or a second bronze-filled action.",
       "Don't give body or sections a background that covers the canvas.",
       "Don't set display type heavier than 300."
     ]

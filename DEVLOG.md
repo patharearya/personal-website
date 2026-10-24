@@ -96,3 +96,19 @@ measurement that settled it.
   held the portrait at opacity 0. Replaced with `fromTo({opacity: 1})` and
   `immediateRender: false`; the check now reads 1 / 0.15 / 1. Confirmed the
   check fails on the old code before the fix.
+
+## 2026-10-23: Water vanished in Arya's open tab (light-theme work, local)
+
+- **Broke:** Arya's browser showed the page on a flat pale background, no water,
+  plus a horizontal scrollbar.
+- **First thought:** the new light-theme shader (three caustic samples for the
+  prism fringe) failed to compile on Arya's Intel Iris Xe GPU.
+- **Settled by:** a headed Chrome on ANGLE/D3D11 with the same GPU rendered the
+  water with no shader errors on a fresh load. Forcing `WEBGL_lose_context`
+  reproduced the screenshot exactly (pixel spread 14.3 → 0.9), so the tab had
+  lost its context and `startWater` never recovered. Added `webglcontextlost`
+  (preventDefault) and `webglcontextrestored` (re-run setup) handlers: spread
+  back to 12.3 after restore. Also render at 0.75× to cut GPU load.
+- **Second, separate bug:** the scrollbar was the pinned Where I've been track
+  (scrollWidth 2392 at a 1965 px viewport). `.has-motion .been__pin` now clips
+  it; scrollWidth equals clientWidth. This bug is also on the live site.
