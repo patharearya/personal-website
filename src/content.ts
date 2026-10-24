@@ -12,10 +12,9 @@ export const person = {
 
 export const about = {
   lead:
-    'I’m Arya. I study computer science at UNC Chapel Hill, with a minor in data science, and I build AI and data tools that show their work: they cite what they read, log what they throw away, and say so when they don’t know.',
+    'Hey! My name is Arya. I study computer science at UNC Chapel Hill, with a minor in data science. I’m a full-stack AI programmer who is interested in turning messy, real-world input and data into something useful and honest that people around the world can use.',
   more: [
-    'Before most of that, there was the pool. I captained the varsity swim team at Enloe High School, swam on its school-record 200-yard medley relay, and still swim with UNC Club Swimming.',
-    'I’ve also spent five years tutoring math, grades 6 to 12, including SAT and ACT prep.',
+    'Before most of this, my place was in the pool. I captained the varsity swim team at Enloe High School, swam on its school-record 200-yard medley relay, and still swim with UNC Club Swimming.',
   ],
 }
 
